@@ -1,0 +1,15 @@
+contents:
+  toc_nb_name : '00.00-Indice.ipynb'
+  directory : 'notebooks'
+
+book_header:
+  book_header : "*Test 2 for the jupyterbookmaker module*"
+  directory : 'notebooks'
+
+navbars:
+  center_nav : 
+    - '00.00-Indice.ipynb'
+  directory : 'notebooks'
+  show_colab : False
+  show_binder : False
+  show_full_entry : True

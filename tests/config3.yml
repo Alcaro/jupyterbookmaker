@@ -1,0 +1,8 @@
+makebook:
+  toc_nb_name : '00.00-Indice.ipynb'
+  book_header : "*[Test 1 for the jupyterbookmaker module](https://github.com/rmsrosa/jupyterbookmaker)*"
+  center_nav : 
+    - '00.00-Indice.ipynb'
+    - 'BA.00-Bibliografia.ipynb'
+  directory : 'notebooks'
+  show_full_entry : True
