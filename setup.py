@@ -10,10 +10,10 @@ import setuptools
 def get_version():
     # Regular expression to capture version number
     # Tested in https://regexr.com/
-    REG_VERSION = re.compile(r'\b(version\s*=\s*[\'"])([.0-9]*)(["\'])') 
+    REG_VERSION = re.compile(r'\b(__version__\s*=\s*[\'"])([.0-9]*)(["\'])')
 
     basedir = os.path.dirname(__file__)
-    with open(os.path.join(basedir, 'jupyterbookmaker/__init__.py')) as f:
+    with open(os.path.join(basedir, 'jupyterbookmaker/jupyterbookmaker.py')) as f:
         for line in f:
             if REG_VERSION.match(line):
                 return REG_VERSION.match(line).group(2)

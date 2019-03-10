@@ -4,6 +4,13 @@
 Adds a book-like structure to a collection of Jupyter notebooks.
 '''
 
+__author__ = "Ricardo M. S. Rosa <rmsrosa@gmail.com>"
+__homepage__ = "http://github.com/rmsrosa/jupyterbookmaker"
+__copyright__ = "Copyright (c) 2019, Ricardo M. S. Rosa"
+__license__ = "MIT"
+__version__ = "0.2.0"
+__status__ = "beta"
+
 import os
 import re
 import itertools
@@ -13,37 +20,57 @@ import yaml
 import nbformat
 from nbformat.v4.nbbase import new_markdown_cell
 
-version = '0.1.0'
-
 # Regular expression for indexing the notebooks
 # Tested in https://regexr.com/
 REG = re.compile(r'(\b\d\d|[A][A-Z]|[B][A-Z])\.(\d{2}|)-(.*)\.ipynb') 
 
-   
-def iter_notebooks(directory=''):
+TOC_COMMENT = "<!--TABLE_OF_CONTENTS-->"    
+HEADER_COMMENT = "<!--HEADER-->"   
+NAVBAR_COMMENT = "<!--NAVIGATOR-->"
+
+def iter_notebooks(directory='.'):
     '''
     Returns a sorted list of the filenames in the given 'directory' 
     that matches the regular expression REG. Filenames that do not
     match the regular expression are ignored.
 
-    Input:
-    ------
+    Argument:
+    ---------
         directory: string
             The directory that contains the notebooks. 
-    Output:
+
+    Returns:
     -------
         : list of strings
-            A list, ordered by the lexicographycal order, with the 
-            filenames of the notebooks that match the regular 
-            expression.
+            A list with the filenames of the notebooks that match 
+            the regular expression, ordered by the lexicographycal 
+            order.
+
     Raises:
     -------
     
     '''
     return sorted(nb for nb in os.listdir(directory) if REG.match(nb))
 
+def is_cell_comment(cell, COMMENT):
+    return  cell.source.startswith(COMMENT)
 
-def get_notebook_title(nb_file, directory=''):
+def remove_comment(COMMENT, directory='.'):
+    for nb_name in iter_notebooks(directory):
+        nb_file = os.path.join(directory, nb_name)
+        nb = nbformat.read(nb_file, as_version=4)
+
+        new_cells = []
+        for cell in nb.cells:
+            if not is_cell_comment(cell, COMMENT):               
+                new_cells.append(cell)
+            else:
+                print(f"- removing '{COMMENT}' cell from {nb_name}")
+
+        nb.cells = new_cells
+        nbformat.write(nb, nb_file)
+
+def get_notebook_title(nb_file, directory='.'):
     '''
     Returns the title of a juyter notebook.
 
@@ -70,7 +97,7 @@ def get_notebook_title(nb_file, directory=''):
             return cell.source[1:].splitlines()[0].strip()
 
 
-def get_notebook_full_entry(nb_name, directory=''):
+def get_notebook_full_entry(nb_name, directory='.'):
     '''
     Returns the entry of a notebook to be used in the Table of Contents
 
@@ -109,23 +136,23 @@ def get_notebook_full_entry(nb_name, directory=''):
 
     return markdown_entry, notebook_entry
 
-def get_notebook_entry(nb_name, directory='', show_full_entry=True):
+def get_notebook_entry(nb_name, directory='.', show_full_entry=True):
     if show_full_entry:
         entry = get_notebook_full_entry(nb_name, directory)[1]
     else:
         entry = get_notebook_title(nb_name, directory)
     return entry   
 
-def gen_contents(directory=''):
+def gen_contents(directory='.'):
     for nb_name in iter_notebooks(directory):
         markdown_entry, notebook_entry = get_notebook_full_entry(nb_name, directory)
         yield f'{markdown_entry}[{notebook_entry}]({nb_name})'
 
-def print_contents(directory=''):
+def print_contents(directory='.'):
     print('\n'.join(gen_contents(directory)))
 
 
-def get_contents(directory=''):
+def get_contents(directory='.'):
     """
     Returns a string with the 'Table of Contents' constructed 
     from the collection of notebooks in the 'directory' given
@@ -138,14 +165,11 @@ def get_contents(directory=''):
     
     return contents
 
-def add_contents(toc_nb_name, directory=''):
+def add_contents(toc_nb_name, directory='.'):
 
     # error handling
     assert(type(directory)==str), "Argument 'directory' should be a string"
     assert(type(toc_nb_name)==str), "Argument 'toc_nb_name' should be a string"
-
-
-    TOC_COMMENT = "<!--TABLE_OF_CONTENTS-->\n"
 
     contents = TOC_COMMENT + "\n\n"
     for item in gen_contents(directory):
@@ -157,11 +181,10 @@ def add_contents(toc_nb_name, directory=''):
         toc_nb_file = toc_nb_name
 
     toc_nb = nbformat.read(toc_nb_file, as_version=4)
-    is_comment = lambda cell: cell.source.startswith(TOC_COMMENT)
 
     toc_cell_found = False
     for cell in toc_nb.cells:
-        if is_comment(cell):
+        if is_cell_comment(cell, TOC_COMMENT):
             cell.source = contents
             toc_cell_found = True
             
@@ -171,20 +194,17 @@ def add_contents(toc_nb_name, directory=''):
     else:
         print(f'No markdown cell starting with {TOC_COMMENT} found in {toc_nb_name}')
 
-def add_book_header(book_header, directory=''):
-    BOOK_COMMENT = "<!--BOOK_INFORMATION-->\n"
+def add_book_header(book_header, directory='.'):
     for nb_name in iter_notebooks(directory):
         nb_file = os.path.join(directory, nb_name)
         nb = nbformat.read(nb_file, as_version=4)
 
-        is_comment = lambda cell: cell.source.startswith(BOOK_COMMENT)
-
-        if is_comment(nb.cells[0]):
-            print('- amending comment for {0}'.format(nb_name))
-            nb.cells[0].source = BOOK_COMMENT + book_header
+        if is_cell_comment(nb.cells[0], HEADER_COMMENT):    
+            print('- amending header for {0}'.format(nb_name))
+            nb.cells[0].source = HEADER_COMMENT + '\n' + book_header
         else:
-            print('- inserting comment for {0}'.format(nb_name))
-            nb.cells.insert(0, new_markdown_cell(BOOK_COMMENT + book_header))
+            print('- inserting header for {0}'.format(nb_name))
+            nb.cells.insert(0, new_markdown_cell(HEADER_COMMENT + '\n' + book_header))
         nbformat.write(nb, nb_file)
 
 def prev_this_next(it):
@@ -192,7 +212,7 @@ def prev_this_next(it):
     next(c)
     return zip(itertools.chain([None], a), b, itertools.chain(c, [None]))
 
-def iter_navbars(center_nav, directory='', 
+def iter_navbars(center_nav = [], directory='.', 
                  repository = None, branch = None, 
                  show_full_entry = True):
 
@@ -228,17 +248,15 @@ def iter_navbars(center_nav, directory='',
             
         yield os.path.join(directory, nb), navbar, this_colab_link, this_binder_link
 
-def add_navbars(center_nav='', directory='', repository = '', branch = '', 
+def add_navbars(center_nav=[], directory='.', repository = '', branch = '', 
                 show_colab=False, show_binder=False, 
                 show_full_entry=True):
-    NAV_COMMENT = "<!--NAVIGATION-->\n"
     for nb_name, navbar, this_colab_link, this_binder_link in iter_navbars(center_nav, directory, repository, branch, show_full_entry):
         nb = nbformat.read(nb_name, as_version=4)
         nb_file = os.path.basename(nb_name)
-        is_comment = lambda cell: cell.source.startswith(NAV_COMMENT)
 
-        navbar_top = navbar_bottom = NAV_COMMENT
-        navbar_bottom = NAV_COMMENT + "\n---\n" + navbar
+        navbar_top = navbar_bottom = NAVBAR_COMMENT + "\n"
+        navbar_bottom = NAVBAR_COMMENT + "\n\n---\n" + navbar
         if show_colab and show_binder:
             navbar_top += this_colab_link + "&nbsp;" + this_binder_link + "&nbsp;\n"
             navbar_bottom += "\n" + this_colab_link + this_binder_link + "&nbsp;" 
@@ -251,14 +269,14 @@ def add_navbars(center_nav='', directory='', repository = '', branch = '',
 
         navbar_top += "\n" + navbar + "\n\n---\n"
 
-        if is_comment(nb.cells[1]):
+        if is_cell_comment(nb.cells[1], NAVBAR_COMMENT):         
             print("- amending navbar for {0}".format(nb_file))
             nb.cells[1].source = navbar_top
         else:
             print("- inserting navbar for {0}".format(nb_file))
             nb.cells.insert(1, new_markdown_cell(source=navbar_top))
 
-        if is_comment(nb.cells[-1]):
+        if is_cell_comment(nb.cells[-1], NAVBAR_COMMENT):
             nb.cells[-1].source = navbar_bottom
         else:
             nb.cells.append(new_markdown_cell(source=navbar_bottom))
@@ -281,12 +299,23 @@ def make_book_from_configfile(config_file):
     if 'makebook' in config:
         make_book(**config['makebook'])
     else:
+        directory = '.'
+        for sec in config:
+            if 'directory' in config[sec]:
+                directory = config[sec]['directory']
+
         if 'contents' in config:
             add_contents(**config['contents'])
+
         if 'book_header' in config:
             add_book_header(**config['book_header'])
+        else:
+            remove_comment(HEADER_COMMENT, directory)
+
         if 'navbars' in config:
             add_navbars(**config['navbars'])
+        else:
+            remove_comment(NAVBAR_COMMENT, directory)
 
 if __name__ == '__main__':
     if len(sys.argv) == 1 or sys.argv[1] == '--help' or sys.argv[1] == '-h':
