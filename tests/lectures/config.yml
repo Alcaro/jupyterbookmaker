@@ -1,7 +1,6 @@
-makebook:
+book:
   toc_nb_name : '00.00-Front_Page.ipynb'
-  book_header : "*Test for the set of lecture notes in the jupyterbookmaker module*"
-  center_nav : 
+  header : "*Header for the set of lecture notes in the jupyterbookmaker module*"
+  core_navigators : 
     - '00.00-Front_Page.ipynb'
-    - 'BA.00-References.ipynb'
   show_full_entry : True

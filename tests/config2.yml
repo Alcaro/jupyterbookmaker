@@ -2,12 +2,12 @@ contents:
   toc_nb_name : '00.00-Front_Page.ipynb'
   directory : 'notebooks'
 
-book_header:
-  book_header : "*Test 2 for the jupyterbookmaker module*"
+header:
+  header : "*Test 2 for the jupyterbookmaker module*"
   directory : 'notebooks'
 
-navbars:
-  center_nav : 
+navigator:
+  core_navigators : 
     - '00.00-Front_Page.ipynb'
   directory : 'notebooks'
   show_colab : False
