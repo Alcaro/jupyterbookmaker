@@ -1,5 +1,5 @@
 contents:
-  toc_nb_name : '00.00-Indice.ipynb'
+  toc_nb_name : '00.00-Front_Page.ipynb'
   directory : 'notebooks'
 
 book_header:
@@ -8,8 +8,8 @@ book_header:
 
 navbars:
   center_nav : 
-    - '00.00-Indice.ipynb'
-    - 'BA.00-Bibliografia.ipynb'
+    - '00.00-Front_Page.ipynb'
+    - 'BA.00-References.ipynb'
   directory : 'notebooks'
   repository : 'rmsrosa/jupyterbookmaker'
   branch : 'master'
