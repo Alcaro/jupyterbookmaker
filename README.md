@@ -1,4 +1,4 @@
-# Jupyter Book Maker
+# Jupyter Bookmaker
 
 Generates a book-like structure to a collection of Jupyter notebooks.
 
@@ -32,7 +32,6 @@ For more information about the structure of a book, see [Parts of a Book Explain
 
 ## Usage
 
-
 The two main functions in this module are
 - 'make_book()': adds the Table of Contents, header, and navigators from the data provided in the arguments.
 - 'make_book_from_configfile()': adds the Table of Contents, header, and navigators from the data stored in a YAML configuration file given as argument.
@@ -40,25 +39,59 @@ The latter function simply reads the parameters from the configuration file and 
 
 The 'make_book()' function calls the following functions in this module, which take care of each of the features of the bookmaker:
 - 'add_contents()': adds the Table of Contents to a selected 'Index' file.
-- 'add_book_header()': adds a header to each notebook with a provied book info.
-- 'write_navbars()': adds navigation bars to the top and bottom of each notebook.
+- 'add_headers()': adds a header to each notebook with a provied book info.
+- 'add_navivagors()': adds navigation bars to the top and bottom of each notebook.
 
 Each of these later three functions can be called separately, if only one of the features is desired.
 
-When running 'jupyterbookmaker.py' as script, it expects the filename of the configuration file and call the function 'make_book_from_configfile()'.
+When running 'jupyterbookmaker.py' as script, it expects the filename of the configuration file and calls the function 'make_book_from_configfile(config_file), where config_file is the name of the configuration file, in a suitable YAML format.
 
 Look at the documentation for more information on each of these functions and for the other functions available on this package.
 
-## Usage
+## Example
 
-See the examples in the 'tests' directory:
+The most convenient way is via a configuration file. Say we have a configuration file called `config.yml`, in the same directory as the notebooks, and with the following content:
+```yaml
+contents:
+  toc_nb_name : '00.00-Front_Page.ipynb'
+
+header:
+  header : "*[Header for the notebooks in the jupyterbookmaker module](https://github.com/rmsrosa/jupyterbookmaker)*"
+
+navigator:
+  core_navigators : 
+    - '00.00-Front_Page.ipynb'
+    - 'BA.00-References.ipynb'
+  repository : 'rmsrosa/jupyterbookmaker'
+  branch : 'master'
+  show_colab : True
+  show_binder : True
+  show_full_entry : False
+```
+
+Then, we import the module (in the same folder) and use the `make_book()` method with this configuration file as argument:
+```python
+import jupyterbookmaker as jbm
+jbm.make_book('config.yml')
+```
+
+Or we execute it as a script in the command line:
+```bash
+jupyterbookmaker.py config.yml
+````
+
+If we call the `jbm.make_book('config.yml')` from a different directory, we should add the parameter `directory` to the configuration file, with the path to the collection of notebooks.
+
+## Further examples
+
+See more examples in the 'tests' directory:
 - From a 'bash' terminal at the 'tests' subdirectory, execute
 '''bash
 ../jupyterbookmaker/jupyterbookmaker.py config1.yml
 '''
 or any of the other config files. This runs the 'jupyterbookmaker.py' as a script.
 - An example of using 'jupyterbookmaker' as a module is in '/tests/makebook_test.py'
-- One can also use the module from a jupyter notebook.
+- One can also use the module from inside a jupyter notebook. This is show in both collections of notebooks in the `notebooks` and `lectures` folders.
 
 ## Requirements
 
@@ -68,11 +101,11 @@ It uses the standard libraries
 - [itertools](https:/docs.python.org/3/library/itertools.html)
 - [sys](https:/docs.python.org/3/library/sys.html)
 
-Besides the 'libraries in the standard implementation, it requires the 'nbformat' library to interact with the jupyter notebooks,
+Besides the libraries in the standard implementation, it requires the 'nbformat' module to interact with the jupyter notebooks,
 - [nbformat](https://pypi.org/project/nbformat/),
-and the 'yaml' library to read '.yml' configuration files,
+and the 'yaml' package to read '.yml' configuration files,
 - [yaml](https:/docs.python.org/3/library/yaml.html).
 
 ## Credits
 
-This package is based on the three modules present in the subdirectory `tools` of the [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook), by [Jake VanderPlas](http://vanderplas.com/). I am distributing this package under the MIT license because so did he.
+This package is based on the three modules present in the subdirectory `tools` of the [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook), by [Jake VanderPlas](http://vanderplas.com/). At the moment, I am distributing this package under the MIT license because so did he, but I plan to change this after I understand these issues a little better.
