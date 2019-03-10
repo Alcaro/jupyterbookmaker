@@ -8,7 +8,7 @@ It adds a Table of Contents to a given "Table of Contents" file, and adds a head
 
 When the collection of notebooks is changed, it is used to update the structure.
 
-## How it works
+## The collection of notebooks
 
 The code works on a collection of indexed notebooks in a directory and builds a Table of Contents out of the them, which is added to a specified file. It also adds a header and top and bottom navigator cells to each notebook. 
 
@@ -20,15 +20,18 @@ The notebooks should be of one the following forms:
 - 'BX.dd-notebookname.ipynb', where 'B' is the upper case letter 'B' and the rest is as above; or
 - 'BX.-notebookname.ipynb', where the symbols are as above.
 
-The filenames are read as regular expressions and three groups are extracted from them, as separated by the first two dots. The first group is essentially for the Chapter and the second group is for the  Section number. There are some special cases:
-- When the first group is '00', the notebook appears in the beginning and is not numbered. This is useful for the 'Table of Contents', the  'Preface', and the 'Introduction', for instance. 
-- When the second group is the empty string '', the section is not numbered. This is useful for 'Part', which does not increase the chapter or section numbers.
-- When the first group starts with 'A', it is assumed to be for an Appendix, in which the second letter 'X' is the letter of the Appendix. 
-- When the first group starts with 'B', the notebook appears at the end and is not numbered. This is useful for the 'Bibliography', and 'Index' for instance.
+The filenames are read as regular expressions and three groups are extracted from them, as separated by the first two dots.
+- When the first group is '00', the notebook appears in the beginning and is not numbered. It is for the **Front Matter**, e.g *Cover page*, *Copyright page*, *Dedication page*, *Epigraph*, *Table of Contents*, *Foreword*, *Preface*, *Acknowlegdments*, and so on.
+- When the first group is from '10' to '99', it is for the **Body** of the book, with the first group representing the chapter number and the second group, the section number. Except when the second group is either the empty string '' or '00', in which cases there is no section number. These are useful for defining a *Part* of the book and an introduction to the chapter, respectively. Notice that '' comes before '00'.
+- When the first group starts with 'A', it is assumed to be for an **Appendix**, in which the second letter 'X' is the letter of the Appendix. The second group functions as the section of the Appendix, with the same exceptions as above in the cases in which the second group is either '' or '00'.
+- When the first group starts with 'B', the notebook appears at the end and is not numbered. It is for the non-numbered part of the **Back Matter**, such as  *Endnotes*, *Copyright permissions*, *Glossary*, *Bibliography*, *Index*, and so on.
 
 The Table of Contents and the navigators follow the lexicographical order, so '' < 'dd' < 'AX' < 'BX', for instance.
 
-## Available functions
+For more information about the structure of a book, see [Parts of a Book Explained: Front Matter, Body, and Back Matter](https://blog.reedsy.com/front-matter-back-matter-book/).
+
+## Usage
+
 
 The two main functions in this module are
 - 'make_book()': adds the Table of Contents, header, and navigators from the data provided in the arguments.
@@ -70,10 +73,6 @@ Besides the 'libraries in the standard implementation, it requires the 'nbformat
 and the 'yaml' library to read '.yml' configuration files,
 - [yaml](https:/docs.python.org/3/library/yaml.html).
 
-## Background
+## Credits
 
-It is based on the three modules in the subdirectory `tools` of the 
-[Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook) 
-by [Jake VanderPlas](http://vanderplas.com/).
-
-It was first derived and modified to be used in the classroom notes for the course [Modelagem Matemática](https://github.com/rmsrosa/modelagem_matematica) of the [Instituto de Matemática of the Universidade Federal do Rio de Janeiro (IM-UFRJ)](https://www.im.ufrj.br).
+This package is based on the three modules present in the subdirectory `tools` of the [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook), by [Jake VanderPlas](http://vanderplas.com/). I am distributing this package under the MIT license because so did he.
