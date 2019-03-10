@@ -2,6 +2,6 @@ contents:
   toc_nb_name : '00.00-Front_Page.ipynb'
   directory : 'notebooks'
 
-book_header:
-  book_header : "*Test 4 for the jupyterbookmaker module, without navigators.*"
+header:
+  header : "*Test 4 for the jupyterbookmaker module, without navigators.*"
   directory : 'notebooks'
