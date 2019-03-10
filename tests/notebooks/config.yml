@@ -1,0 +1,15 @@
+contents:
+  toc_nb_name : '00.00-Front_Page.ipynb'
+
+book_header:
+  book_header : "*[Test for the jupyterbookmaker module](https://github.com/rmsrosa/jupyterbookmaker)*"
+
+navbars:
+  center_nav : 
+    - '00.00-Front_Page.ipynb'
+    - 'BA.00-References.ipynb'
+  repository : 'rmsrosa/jupyterbookmaker'
+  branch : 'master'
+  show_colab : True
+  show_binder : True
+  show_full_entry : False
