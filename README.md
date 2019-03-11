@@ -104,4 +104,11 @@ and the 'yaml' package to read '.yml' configuration files,
 
 ## Credits
 
-This package is based on the three modules present in the subdirectory `tools` of the [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook), by [Jake VanderPlas](http://vanderplas.com/). At the moment, I am distributing this package under the MIT license because so did he, but I plan to change this after I understand these issues a little better.
+This package is based on the three modules present in the subdirectory `tools` of the [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook), by [Jake VanderPlas](http://vanderplas.com/).
+
+## License
+
+[Jake VanderPlas](http://vanderplas.com/) licensed the reference work under the [MIT license](https://opensource.org/licenses/MIT).
+
+The modifications being distributed in this package are made available under the [GNU GPL license](https://www.gnu.org/licenses/gpl.html).
+
