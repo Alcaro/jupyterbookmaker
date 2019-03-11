@@ -6,8 +6,11 @@ Generates a book-like structure to a collection of Jupyter notebooks.
 
 __author__ = "Ricardo M. S. Rosa <rmsrosa@gmail.com>"
 __homepage__ = "http://github.com/rmsrosa/jupyterbookmaker"
-__copyright__ = "Copyright (c) 2019, Ricardo M. S. Rosa"
-__license__ = "MIT"
+__copyright__ = '''
+Original work Copyright (c) 2016 Jacob VanderPlas
+Modified work licensed under GNU GPLv3
+'''
+__license__ = "GNU GPLv3"
 __version__ = "0.2.0"
 __status__ = "beta"
 
