@@ -9,9 +9,9 @@ from context import jupyterbookmaker as jbm
 if __name__ == '__main__':
 
 # Add contents, book info, and navigation bars
-    jbm.make_book(toc_nb_name = '00.00-Indice.ipynb',
+    jbm.make_book(toc_nb_name = '00.00-Front_Page.ipynb',
                   header = 'Test 3 for the jupyterbookmaker module',
-                  core_navigators=['00.00-Indice.ipynb', 
-                    'BA.00-Bibliografia.ipynb'],                  
+                  core_navigators=['00.00-Front_Page.ipynb', 
+                    'BA.00-References.ipynb'],                  
                   directory='notebooks',
                   show_full_entry=True)

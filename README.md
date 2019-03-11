@@ -52,21 +52,17 @@ Look at the documentation for more information on each of these functions and fo
 
 The most convenient way is via a configuration file. Say we have a configuration file called `config.yml`, in the same directory as the notebooks, and with the following content:
 ```yaml
-contents:
-  toc_nb_name : '00.00-Front_Page.ipynb'
-
-header:
-  header : "*[Header for the notebooks in the jupyterbookmaker module](https://github.com/rmsrosa/jupyterbookmaker)*"
-
-navigator:
-  core_navigators : 
+book:
+  toc_nb_name: 00.00-Front_Page.ipynb
+  header: "*[Header for the notebooks in the jupyterbookmaker module](https://github.com/rmsrosa/jupyterbookmaker)*"
+  core_navigators:
     - '00.00-Front_Page.ipynb'
     - 'BA.00-References.ipynb'
-  repository : 'rmsrosa/jupyterbookmaker'
-  branch : 'master'
-  show_colab : True
-  show_binder : True
-  show_full_entry : False
+  repository: rmsrosa/jupyterbookmaker
+  branch: master
+  show_colab: True
+  show_binder: True
+  show_full_entry: False
 ```
 
 Then, we import the module (in the same folder) and use the `make_book()` method with this configuration file as argument:

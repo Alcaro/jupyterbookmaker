@@ -1,15 +1,11 @@
-contents:
-  toc_nb_name : '00.00-Front_Page.ipynb'
-
-header:
-  header : "*[Header for the notebooks in the jupyterbookmaker module](https://github.com/rmsrosa/jupyterbookmaker)*"
-
-navigator:
-  core_navigators : 
-    - '00.00-Front_Page.ipynb'
-    - 'BA.00-References.ipynb'
-  repository : 'rmsrosa/jupyterbookmaker'
-  branch : 'master'
-  show_colab : True
-  show_binder : True
-  show_full_entry : False
+book:
+  toc_nb_name: 00.00-Front_Page.ipynb
+  header: "*[Header for the notebooks in the jupyterbookmaker module](https://github.com/rmsrosa/jupyterbookmaker)*"
+  core_navigators:
+    - 00.00-Front_Page.ipynb
+    - BA.00-References.ipynb
+  repository: rmsrosa/jupyterbookmaker
+  branch: master
+  show_colab: True
+  show_binder: True
+  show_full_entry: False
