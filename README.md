@@ -13,12 +13,12 @@ When the collection of notebooks is changed, it is used to update the structure.
 The code works on a collection of indexed notebooks in a directory and builds a Table of Contents out of the them, which is added to a specified file. It also adds a header and top and bottom navigator cells to each notebook. 
 
 The notebooks should be of one the following forms:
-- `dd.dd-notebookname.ipynb`, where `d` is any digit from 0 to 9;
-- `dd.-notebookname.ipynb`, where `d` is as above;
-- `AX.dd-notebookname.ipynb`, where `d` is as above, `A` is the uppercase letter `A` and `X` is any uppercase letter;
-- `AX.-notebookname.ipynb`, where the symbols are as above;
-- `BX.dd-notebookname.ipynb`, where `B` is the upper case letter `B` and the rest is as above; or
-- `BX.-notebookname.ipynb`, where the symbols are as above.
+- `'dd.dd-notebookname.ipynb'`, where `'d'` is any decimal from 0 to 9;
+- `'dd.-notebookname.ipynb'`, where `'d'` is as above;
+- `'AX.dd-notebookname.ipynb'`, where `'d'` is as above, `'A'` is the uppercase letter `'A'` and `'X'` is any uppercase letter;
+- `'AX.-notebookname.ipynb'`, where the symbols are as above;
+- `'BX.dd-notebookname.ipynb'`, where `'B'` is the upper case letter `'B'` and the rest is as above; or
+- `'BX.-notebookname.ipynb'`, where the symbols are as above.
 
 The filenames are read as regular expressions and three groups are extracted from them, as separated by the first two dots.
 - When the first group is `'00'`, the notebook appears in the beginning and is not numbered. It is for the **Front Matter**, e.g *Cover page*, *Copyright page*, *Dedication page*, *Epigraph*, *Table of Contents*, *Foreword*, *Preface*, *Acknowlegdments*, and so on.
