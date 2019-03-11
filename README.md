@@ -13,38 +13,38 @@ When the collection of notebooks is changed, it is used to update the structure.
 The code works on a collection of indexed notebooks in a directory and builds a Table of Contents out of the them, which is added to a specified file. It also adds a header and top and bottom navigator cells to each notebook. 
 
 The notebooks should be of one the following forms:
-- 'dd.dd-notebookname.ipynb', where 'd' is any digit from 0 to 9;
-- 'dd.-notebookname.ipynb', where 'd' is as above;
-- 'AX.dd-notebookname.ipynb', where 'd' is as above, 'A' is the uppercase letter 'A' and 'X' is any uppercase letter;
-- 'AX.-notebookname.ipynb', where the symbols are as above;
-- 'BX.dd-notebookname.ipynb', where 'B' is the upper case letter 'B' and the rest is as above; or
-- 'BX.-notebookname.ipynb', where the symbols are as above.
+- `dd.dd-notebookname.ipynb`, where `d` is any digit from 0 to 9;
+- `dd.-notebookname.ipynb`, where `d` is as above;
+- `AX.dd-notebookname.ipynb`, where `d` is as above, `A` is the uppercase letter `A` and `X` is any uppercase letter;
+- `AX.-notebookname.ipynb`, where the symbols are as above;
+- `BX.dd-notebookname.ipynb`, where `B` is the upper case letter `B` and the rest is as above; or
+- `BX.-notebookname.ipynb`, where the symbols are as above.
 
 The filenames are read as regular expressions and three groups are extracted from them, as separated by the first two dots.
-- When the first group is '00', the notebook appears in the beginning and is not numbered. It is for the **Front Matter**, e.g *Cover page*, *Copyright page*, *Dedication page*, *Epigraph*, *Table of Contents*, *Foreword*, *Preface*, *Acknowlegdments*, and so on.
-- When the first group is from '10' to '99', it is for the **Body** of the book, with the first group representing the chapter number and the second group, the section number. Except when the second group is either the empty string '' or '00', in which cases there is no section number. These are useful for defining a *Part* of the book and an introduction to the chapter, respectively. Notice that '' comes before '00'.
-- When the first group starts with 'A', it is assumed to be for an **Appendix**, in which the second letter 'X' is the letter of the Appendix. The second group functions as the section of the Appendix, with the same exceptions as above in the cases in which the second group is either '' or '00'.
-- When the first group starts with 'B', the notebook appears at the end and is not numbered. It is for the non-numbered part of the **Back Matter**, such as  *Endnotes*, *Copyright permissions*, *Glossary*, *Bibliography*, *Index*, and so on.
+- When the first group is `'00'`, the notebook appears in the beginning and is not numbered. It is for the **Front Matter**, e.g *Cover page*, *Copyright page*, *Dedication page*, *Epigraph*, *Table of Contents*, *Foreword*, *Preface*, *Acknowlegdments*, and so on.
+- When the first group is from `'10'` to `'99'`, it is for the **Body** of the book, with the first group representing the chapter number and the second group, the section number. Except when the second group is either the empty string '' or '00', in which cases there is no section number. These are useful for defining a *Part* of the book and an introduction to the chapter, respectively. Notice that '' comes before '00'.
+- When the first group starts with `'A'`, it is assumed to be for an **Appendix**, in which the second letter `'X'` is the letter of the Appendix. The second group functions as the section of the Appendix, with the same exceptions as above in the cases in which the second group is either `''` or `'00'`.
+- When the first group starts with `'B'`, the notebook appears at the end and is not numbered. It is for the non-numbered part of the **Back Matter**, such as  *Endnotes*, *Copyright permissions*, *Glossary*, *Bibliography*, *Index*, and so on.
 
-The Table of Contents and the navigators follow the lexicographical order, so '' < 'dd' < 'AX' < 'BX', for instance.
+The Table of Contents and the navigators follow the lexicographical order, so `''` < `'dd'` < `'AX'` < `'BX'`, for instance.
 
 For more information about the structure of a book, see [Parts of a Book Explained: Front Matter, Body, and Back Matter](https://blog.reedsy.com/front-matter-back-matter-book/).
 
 ## Usage
 
 The two main functions in this module are
-- 'make_book()': adds the Table of Contents, header, and navigators from the data provided in the arguments.
-- 'make_book_from_configfile()': adds the Table of Contents, header, and navigators from the data stored in a YAML configuration file given as argument.
-The latter function simply reads the parameters from the configuration file and passes them to the 'make_book()' function.
+- `make_book()`: adds the Table of Contents, header, and navigators from the data provided in the arguments.
+- `make_book_from_configfile()`: adds the Table of Contents, header, and navigators from the data stored in a YAML configuration file given as argument.
+The latter function simply reads the parameters from the configuration file and passes them to the `make_book()` function.
 
-The 'make_book()' function calls the following functions in this module, which take care of each of the features of the bookmaker:
-- 'add_contents()': adds the Table of Contents to a selected 'Index' file.
-- 'add_headers()': adds a header to each notebook with a provied book info.
-- 'add_navivagors()': adds navigation bars to the top and bottom of each notebook.
+The `make_book()` function calls the following functions in this module, which take care of each of the features of the bookmaker:
+- `add_contents()`: adds the Table of Contents to a selected "Index" file.
+- `add_headers()`: adds a header to each notebook with a provied book info.
+- `add_navivagors()`: adds navigation bars to the top and bottom of each notebook.
 
 Each of these later three functions can be called separately, if only one of the features is desired.
 
-When running 'jupyterbookmaker.py' as script, it expects the filename of the configuration file and calls the function 'make_book_from_configfile(config_file), where config_file is the name of the configuration file, in a suitable YAML format.
+When running `jupyterbookmaker.py` as script, it expects the filename of the configuration file and calls the function `make_book_from_configfile(config_file)`, where config_file is the name of the configuration file, in a suitable YAML format.
 
 Look at the documentation for more information on each of these functions and for the other functions available on this package.
 
@@ -56,8 +56,8 @@ book:
   toc_nb_name: 00.00-Front_Page.ipynb
   header: "*[Header for the notebooks in the jupyterbookmaker module](https://github.com/rmsrosa/jupyterbookmaker)*"
   core_navigators:
-    - '00.00-Front_Page.ipynb'
-    - 'BA.00-References.ipynb'
+    - 00.00-Front_Page.ipynb
+    - BA.00-References.ipynb
   repository: rmsrosa/jupyterbookmaker
   branch: master
   show_colab: True
@@ -73,20 +73,20 @@ jbm.make_book('config.yml')
 
 Or we execute it as a script in the command line:
 ```bash
-jupyterbookmaker.py config.yml
-````
+./jupyterbookmaker.py config.yml
+```
 
 If we call the `jbm.make_book('config.yml')` from a different directory, we should add the parameter `directory` to the configuration file, with the path to the collection of notebooks.
 
 ## Further examples
 
-See more examples in the 'tests' directory:
-- From a 'bash' terminal at the 'tests' subdirectory, execute
-'''bash
+See more examples in the `tests` directory:
+- From a `bash` terminal at the `tests` subdirectory, execute
+```bash
 ../jupyterbookmaker/jupyterbookmaker.py config1.yml
-'''
-or any of the other config files. This runs the 'jupyterbookmaker.py' as a script.
-- An example of using 'jupyterbookmaker' as a module is in '/tests/makebook_test.py'
+```
+or any of the other config files. This runs the `jupyterbookmaker.py` as a script.
+- An example of using `jupyterbookmaker` as a module is in `/tests/makebook_test.py`
 - One can also use the module from inside a jupyter notebook. This is show in both collections of notebooks in the `notebooks` and `lectures` folders.
 
 ## Requirements
@@ -97,9 +97,9 @@ It uses the standard libraries
 - [itertools](https:/docs.python.org/3/library/itertools.html)
 - [sys](https:/docs.python.org/3/library/sys.html)
 
-Besides the libraries in the standard implementation, it requires the 'nbformat' module to interact with the jupyter notebooks,
+Besides the libraries in the standard implementation, it requires the `nbformat` module to interact with the jupyter notebooks,
 - [nbformat](https://pypi.org/project/nbformat/),
-and the 'yaml' package to read '.yml' configuration files,
+and the `yaml` package to read `*.yml` configuration files,
 - [yaml](https:/docs.python.org/3/library/yaml.html).
 
 ## Credits
@@ -111,4 +111,3 @@ This package is based on the three modules present in the subdirectory `tools` o
 [Jake VanderPlas](http://vanderplas.com/) licensed the reference work under the [MIT license](https://opensource.org/licenses/MIT).
 
 The modifications being distributed in this package are made available under the [GNU GPL license](https://www.gnu.org/licenses/gpl.html).
-
