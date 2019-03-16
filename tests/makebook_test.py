@@ -13,5 +13,5 @@ if __name__ == '__main__':
                   header = 'Test 3 for the jupyterbookmaker module',
                   core_navigators=['00.00-Front_Page.ipynb', 
                     'BA.00-References.ipynb'],                  
-                  directory='notebooks',
-                  show_full_entry=True)
+                  app_to_notes_path='notebooks',
+                  show_full_entry_in_nav=True)

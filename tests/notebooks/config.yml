@@ -6,6 +6,7 @@ book:
     - BA.00-References.ipynb
   repository: rmsrosa/jupyterbookmaker
   branch: master
+  github_nb_dir: tests/notebooks
   show_colab: True
   show_binder: True
-  show_full_entry: False
+  show_full_entry_in_nav: False

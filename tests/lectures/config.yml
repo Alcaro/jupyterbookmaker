@@ -3,4 +3,9 @@ book:
   header: "*Header for the set of lecture notes in the jupyterbookmaker module*"
   core_navigators:
     - 00.00-Front_Page.ipynb
-  show_full_entry: True
+  repository: rmsrosa/jupyterbookmaker
+  branch: master
+  github_nb_dir: tests/lectures
+  show_binder: True
+  show_full_entry_in_toc: False
+  show_full_entry_in_nav: False
