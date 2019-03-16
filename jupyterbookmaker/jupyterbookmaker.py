@@ -11,7 +11,7 @@ Original work Copyright (c) 2016 Jacob VanderPlas
 Modified work licensed under GNU GPLv3
 '''
 __license__ = "GNU GPLv3"
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __status__ = "beta"
 
 import os
