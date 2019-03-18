@@ -83,6 +83,8 @@ If we call the `jbm.make_book('config.yml')` from a different directory, we shou
 
 Notice, in the example configuration file above, the parameters `show_colab: True` and `show_binder: True`, and other parameters with the information about the github repository and directory where the notebooks in this package reside. This allows the module to add direct links for the corresponding notebooks to be opened in one of this cloud computing python environments.
 
+When opening the direct links from within the notebook rendering of the github, it is necessary to click with the right button, otherwise nothing will be opened.
+
 ## Further examples
 
 See more examples in the `tests` directory:
