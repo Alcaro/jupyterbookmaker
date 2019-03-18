@@ -11,7 +11,7 @@ Original work Copyright (c) 2016 Jacob VanderPlas
 Modified work licensed under GNU GPLv3
 '''
 __license__ = "GNU GPLv3"
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 __status__ = "beta"
 
 import os
@@ -240,10 +240,10 @@ def get_navigator_entries(core_navigators = [], app_to_notes_path='.',
     NEXT_TEMPLATE = "| [{title} ->]({url})"
 
     COLAB_LINK = """
-<a href="https://colab.research.google.com/github/{repository}/blob/{branch}/{github_nb_dir}/{notebook_filename}"><img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" title="Open and Execute in Google Colaboratory"></a>
+<a href="https://colab.research.google.com/github/{repository}/blob/{branch}/{github_nb_dir}/{notebook_filename}" target="_blank"><img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" title="Open and Execute in Google Colaboratory"></a>
 """
     BINDER_LINK = """
-<a href="https://mybinder.org/v2/gh/{repository}/{branch}?filepath={github_nb_dir}/{notebook_filename}"><img align="left" src="https://mybinder.org/badge.svg" alt="Open in binder" title="Open and Execute in Binder"></a>
+<a href="https://mybinder.org/v2/gh/{repository}/{branch}?filepath={github_nb_dir}/{notebook_filename}" target="_blank"><img align="left" src="https://mybinder.org/badge.svg" alt="Open in binder" title="Open and Execute in Binder"></a>
 """
 
     for prev_nb, this_nb, next_nb in prev_this_next(indexed_notebooks(app_to_notes_path)):
