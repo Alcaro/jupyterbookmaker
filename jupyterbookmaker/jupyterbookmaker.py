@@ -11,7 +11,7 @@ Original work Copyright (c) 2016 Jacob VanderPlas
 Modified work licensed under GNU GPLv3
 '''
 __license__ = "GNU GPLv3"
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 __status__ = "beta"
 
 import os
@@ -146,14 +146,14 @@ def get_notebook_full_entry(nb_name, app_to_notes_path='.'):
         num_entry = f'{chapter_clean}. '
     else:
         markdown_entry = '&nbsp;&nbsp;&nbsp;&nbsp; '
-        num_entry = f'{chapter_clean}.{int(section)} '
+        num_entry = f'{chapter_clean}.{int(section)}. '
     
     return markdown_entry, num_entry, title
 
 def get_notebook_entry(nb_name, app_to_notes_path='.', 
                        show_full_entry=True):
     if show_full_entry:
-        entry = ' '.join(list(get_notebook_full_entry(nb_name, app_to_notes_path)[1:3]))
+        entry = ''.join(list(get_notebook_full_entry(nb_name, app_to_notes_path)[1:3]))
     else:
         entry = get_notebook_title(nb_name, app_to_notes_path)
     return entry   
@@ -249,15 +249,18 @@ def get_navigator_entries(core_navigators = [], app_to_notes_path='.',
     for prev_nb, this_nb, next_nb in prev_this_next(indexed_notebooks(app_to_notes_path)):
         navbar = ""
         if prev_nb:
-            entry = get_notebook_entry(prev_nb, app_to_notes_path, show_full_entry_in_nav)
+            entry = get_notebook_entry(prev_nb, app_to_notes_path, 
+                                       show_full_entry_in_nav)
             navbar += PREV_TEMPLATE.format(title=entry, url=prev_nb)
 
         for center_nb in core_navigators:
-            entry = get_notebook_entry(center_nb, app_to_notes_path, show_full_entry_in_nav)
+            entry = get_notebook_entry(center_nb, app_to_notes_path, 
+                                       show_full_entry_in_nav)
             navbar += CENTER_TEMPLATE.format(title=entry, url=center_nb)
 
         if next_nb:
-            entry = get_notebook_entry(next_nb, app_to_notes_path, show_full_entry_in_nav)
+            entry = get_notebook_entry(next_nb, app_to_notes_path, 
+                                       show_full_entry_in_nav)
             navbar += NEXT_TEMPLATE.format(title=entry, url=next_nb)
 
         this_colab_link = COLAB_LINK.format(repository=repository, 
@@ -274,7 +277,8 @@ def add_navigators(core_navigators=[], app_to_notes_path='.',
                    github_nb_dir = '',
                    show_colab=False, show_binder=False, 
                    show_full_entry_in_nav=True):
-    for nb_file, navbar, this_colab_link, this_binder_link in get_navigator_entries(core_navigators, app_to_notes_path, repository, branch, github_nb_dir, show_full_entry_in_nav):
+    for nb_file, navbar, this_colab_link, this_binder_link in get_navigator_entries(core_navigators, app_to_notes_path, repository, 
+                          branch, github_nb_dir, show_full_entry_in_nav):
         nb = nbformat.read(nb_file, as_version=4)
         nb_name = os.path.basename(nb_file)
 
