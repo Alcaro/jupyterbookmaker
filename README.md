@@ -44,7 +44,7 @@ The `make_book()` function calls the following functions in this module, which t
 
 Each of these later three functions can be called separately, if only one of the features is desired.
 
-When running `jupyterbookmaker.py` as script, it expects the filename of the configuration file and calls the function `make_book_from_configfile(config_file)`, where config_file is the name of the configuration file.
+When running `jupyterbookmaker.py` as a script, it expects the filename of the configuration file and calls the function `make_book_from_configfile(config_file)`, where config_file is the name of the configuration file.
 
 Look at the documentation for more information on each of these functions and for the other functions available on this package.
 
