@@ -58,7 +58,8 @@ book:
   core_navigators:
     - 00.00-Front_Page.ipynb
     - BA.00-References.ipynb
-  repository: rmsrosa/jupyterbookmaker
+  user: rmsrosa
+  repository: jupyterbookmaker
   branch: master
   github_nb_dir: tests/notebooks
   show_colab: True
