@@ -3,7 +3,8 @@ book:
   header: "*Header for the set of lecture notes in the jupyterbookmaker module*"
   core_navigators:
     - 00.00-Front_Page.ipynb
-  repository: rmsrosa/jupyterbookmaker
+  user: rmsrosa
+  repository: jupyterbookmaker
   branch: master
   github_nb_dir: tests/lectures
   show_binder: True
