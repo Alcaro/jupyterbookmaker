@@ -11,7 +11,7 @@ Original work Copyright (c) 2016 Jacob VanderPlas
 Modified work licensed under GNU GPLv3
 '''
 __license__ = "GNU GPLv3"
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 __status__ = "beta"
 
 import os
@@ -279,7 +279,7 @@ def get_navigator_entries(core_navigators = [], app_to_notes_path='.',
         this_slide_link = SLIDES_LINK.format(user=user, 
             repository=repository,
             github_io_slides_dir=github_io_slides_dir,
-            slides_filename=os.path.basename(this_nb.replace('.html',
+            slides_filename=os.path.basename(this_nb.replace('.ipynb',
                                                              '.slides.html')))
             
         yield os.path.join(app_to_notes_path, this_nb), navbar, this_colab_link, this_binder_link, this_slide_link
