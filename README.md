@@ -1,6 +1,6 @@
 # Jupyter Bookmaker
 
-Generates a book-like structure to a collection of Jupyter notebooks.
+Generates a navigable book-like structure to a collection of Jupyter notebooks.
 
 ## Description
 
@@ -10,9 +10,10 @@ When the collection of notebooks is changed, it updates the structure.
 
 ## The collection of notebooks
 
-The code works on a collection of indexed notebooks in a directory and builds a Table of Contents out of the them, which is added to a specified file. It also adds a header and top and bottom navigator cells to each notebook. 
+The code works on a collection of indexed notebooks in a directory and builds a Table of Contents out of the them, which is added to a specified file. It also adds a header and top and bottom navigator cells to each notebook.
 
 In order to be indexed, the notebooks should be of one the following forms:
+
 - `'dd.dd-notebookname.ipynb'`, where `'d'` is any decimal from 0 to 9;
 - `'dd.-notebookname.ipynb'`, where `'d'` is as above;
 - `'AX.dd-notebookname.ipynb'`, where `'d'` is as above, `'A'` is the uppercase letter `'A'` and `'X'` is any uppercase letter;
@@ -21,6 +22,7 @@ In order to be indexed, the notebooks should be of one the following forms:
 - `'BX.-notebookname.ipynb'`, where the symbols are as above.
 
 The filenames go through a regular expressions matching operator and three groups are extracted from them, as separated by the first two dots.
+
 - When the first group is `'00'`, the notebook appears in the beginning and is not numbered. It is for the **Front Matter**, e.g *Cover page*, *Copyright page*, *Dedication page*, *Epigraph*, *Table of Contents*, *Foreword*, *Preface*, *Acknowlegdments*, and so on.
 - When the first group is from `'10'` to `'99'`, it is for the **Body** of the book, with the first group representing the chapter number and the second group, the section number. Except when the second group is either the empty string '' or '00', in which cases there is no section number. These are useful for defining a *Part* of the book and an introduction to the chapter, respectively. Notice that '' comes before '00'.
 - When the first group starts with `'A'`, it is assumed to be for an **Appendix**, in which the second letter `'X'` is the letter of the Appendix. The second group functions as the section of the Appendix, with the same exceptions as above in the cases in which the second group is either `''` or `'00'`.
@@ -33,11 +35,13 @@ For more information about the structure of a book, see [Parts of a Book Explain
 ## Usage
 
 The two main functions in this module are
+
 - `make_book()`: adds the Table of Contents, header, and navigators from the data provided in the arguments.
 - `make_book_from_configfile()`: adds the Table of Contents, header, and navigators from the data stored in a YAML configuration file given as argument.
 The latter function simply reads the parameters from the configuration file and passes them to the `make_book()` function.
 
 The `make_book()` function calls the following functions in this module, which take care of each of the three main features of the bookmaker:
+
 - `add_contents()`: adds the Table of Contents to a selected "Contents" file.
 - `add_headers()`: adds a header to each notebook with a given book info.
 - `add_navigators()`: adds navigation bars to the top and bottom of each notebook.
@@ -51,6 +55,7 @@ Look at the documentation for more information on each of these functions and fo
 ## Example
 
 The most convenient way to use the module, or script, is via a configuration file. Say we have a configuration file called `config.yml`, in the same directory as the notebooks, and with the following content:
+
 ```yaml
 book:
   toc_nb_name: 00.00-Front_Page.ipynb
@@ -68,12 +73,14 @@ book:
 ```
 
 Then, we import the module (in the same folder) and use the `make_book()` method with this configuration file as argument:
+
 ```python
 import jupyterbookmaker as jbm
 jbm.make_book('config.yml')
 ```
 
 Or we execute it as a script in the command line:
+
 ```bash
 ./jupyterbookmaker.py config.yml
 ```
@@ -89,16 +96,21 @@ When opening the direct links from within the notebook rendering of the github, 
 ## Further examples
 
 See more examples in the `tests` directory:
+
 - There are five examples of configuration files in the `tests` subdirectory [config1.yml](tests/config1.yml), [config2.yml](tests/config2.yml), [config3.yml](tests/config3.yml), [config4.yml](tests/config4.yml), [config5.yml](tests/config5.yml). Have a look a them for examples of different configuration parameters.
 - To run one of the examples, go to `bash` terminal at the `tests` subdirectory and run
-```bash
-../jupyterbookmaker/jupyterbookmaker.py config1.yml
-```
+
+  ```bash
+  ../jupyterbookmaker/jupyterbookmaker.py config1.yml
+  ```
+
 or any of the other config files. This runs the `jupyterbookmaker.py` as a script.
+
 - An example of using `jupyterbookmaker` as a module is in `/tests/makebook_test.py`
 - One can also use the module from inside a jupyter notebook. This is show in both collections of notebooks in the `notebooks` and `lectures` folders. This is, in fact, the most convenient way.
 
 In the first examples, the script is ran from the directory `tests`, while the notebooks are the subdirectory `notebooks`. In this case, the following lines should be added to the configuration file, so the script knowns where to find the notebooks:
+
 ```yaml
 directory:
   app_to_notes_path: notebooks
@@ -106,15 +118,16 @@ directory:
 
 ## Requirements
 
-It uses the standard libraries
+It uses the following standard libraries:
+
 - [re](https:/docs.python.org/3/library/re.html)
 - [os](https:/docs.python.org/3/library/os.html)
 - [itertools](https:/docs.python.org/3/library/itertools.html)
 - [sys](https:/docs.python.org/3/library/sys.html)
 
-Besides the libraries in the standard implementation, it requires the `nbformat` module to interact with the jupyter notebooks,
+Besides the libraries in the standard implementation, it requires the `nbformat` module, to interact with the jupyter notebooks, and the `yaml` package, to read `*.yml` configuration files:
+
 - [nbformat](https://pypi.org/project/nbformat/),
-and the `yaml` package to read `*.yml` configuration files,
 - [yaml](https:/docs.python.org/3/library/yaml.html).
 
 ## Credits
