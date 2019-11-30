@@ -6,8 +6,6 @@ Generates a navigable book-like structure to a collection of Jupyter notebooks.
 
 It adds a Table of Contents to a given "Table of Contents" file, and adds a header and top and bottom navigator cells to each notebook.
 
-When the collection of notebooks is changed, it updates the structure.
-
 ## The collection of notebooks
 
 The code works on a collection of indexed notebooks in a directory and builds a Table of Contents out of the them, which is added to a specified file. It also adds a header and top and bottom navigator cells to each notebook.
