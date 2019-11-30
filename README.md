@@ -1,8 +1,10 @@
-# Jupyter Bookmaker
+# Archived Jupyter Bookmaker
 
-Generates a navigable book-like structure to a collection of Jupyter notebooks.
+This repository has been archived. It has been moved, under a different name, to [nbbinder](https://github.com/rmsrosa/nbbinder).
 
 ## Description
+
+Generates a navigable book-like structure to a collection of Jupyter notebooks.
 
 It adds a Table of Contents to a given "Table of Contents" file, and adds a header and top and bottom navigator cells to each notebook.
 
