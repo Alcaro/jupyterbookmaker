@@ -1,6 +1,14 @@
 # Archived Jupyter Bookmaker
 
-This repository has been archived. It has been moved, under a different name, to [nbbinder](https://github.com/rmsrosa/nbbinder).
+This repository has been archived. The project continues, under a different name, in [nbbinder](https://github.com/rmsrosa/nbbinder).
+
+## Reason for archiving
+
+I never liked the name `jupyterbookmaker`. And since "bookmaker" has a meaning different than "producing a book", this name turned out to be innapropriate.
+
+I also thought about `jupyterbookbinder`, but I was reluctant to use a name associated with `binder` because of the [mybinder](https://mybinder.org/) project. But "binder" is indeed a more appropriate name. And there shouldn't be much conflict upon adding words to it, as in `jupyterbookbinder`. But this is still a long name, which also bothered me. So I finally settled for `notebook binder`, or `nbbinder`, for short.
+
+I could have thus simply renamed the repository to `nbbinder`, but I thought it was best to simply archive this one.
 
 ## Description
 
