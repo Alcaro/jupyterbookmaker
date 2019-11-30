@@ -119,10 +119,10 @@ and the `yaml` package to read `*.yml` configuration files,
 
 ## Credits
 
-This package is based on the three modules present in the subdirectory `tools` of the [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook), by [Jake VanderPlas](http://vanderplas.com/).
+This package is based on the three modules present, in early 2018, in the subdirectory [`tools`](https://github.com/jakevdp/PythonDataScienceHandbook/tree/master/tools) of the [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook), by [Jake VanderPlas](http://vanderplas.com/).
 
 ## License
 
-[Jake VanderPlas](http://vanderplas.com/) licensed the reference work under the [MIT license](https://opensource.org/licenses/MIT).
+The original work in [Python Data Science Handbook/tools](https://github.com/jakevdp/PythonDataScienceHandbook/tree/master/tools) is licensed by [Jake VanderPlas](http://vanderplas.com/) under the [MIT license](https://opensource.org/licenses/MIT).
 
-The modifications being distributed in this package are made available under the [GNU GPL license](https://www.gnu.org/licenses/gpl.html).
+The current modifications in this package is now being license as well under the [MIT license](https://opensource.org/licenses/MIT). See the file [LICENSE](LICENSE).
